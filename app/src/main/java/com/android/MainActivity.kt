@@ -1,42 +1,54 @@
 package com.android
 
 import android.content.Intent
+import android.content.SearchRecentSuggestionsProvider
+import android.net.wifi.hotspot2.pps.HomeSp
 import android.os.Bundle
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.Fragments.HomeFragment
+import com.android.Fragments.NotificationsFragment
+import com.android.Fragments.ProfileFragment
+import com.android.Fragments.SearchFragment
 import com.android.instagram.R
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var textView: TextView
+  internal var selectedFragment: Fragment?=null
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_home -> {
-                textView.setText("Home")
-                return@OnNavigationItemSelectedListener true
+                selectedFragment=HomeFragment()
+
             }
             R.id.nav_search -> {
-                textView.setText("Search")
-                return@OnNavigationItemSelectedListener true
+
+                selectedFragment=SearchFragment()
             }
             R.id.nav_add_post -> {
-                textView.setText("Add Post")
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_notifications -> {
-                textView.setText("Notifications")
-                return@OnNavigationItemSelectedListener true
+
+                selectedFragment=NotificationsFragment()
             }
             R.id.nav_profile -> {
-                textView.setText("Profile")
-                return@OnNavigationItemSelectedListener true
+
+                selectedFragment=ProfileFragment()
             }
         }
-
+        if(selectedFragment!=null){
+            supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,
+               selectedFragment!!
+            ).commit()
+        }
         false
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +57,14 @@ class MainActivity : AppCompatActivity() {
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        textView=findViewById(R.id.message)
+       // textView=findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        //To make home as default page,
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_container,
+            HomeFragment()
+        ).commit()
+
     }
 }
