@@ -19,18 +19,19 @@
             android:background="#ffffff">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp">
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:layout_marginRight="19dp"
+                    android:layout_height="50dp"
                     android:hint="Search"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="15dp"
                     android:layout_toEndOf="@+id/search_frg_icon"/>
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_centerVertical="true"
                     android:id="@+id/search_frg_icon"
                     android:src="@drawable/search"/>
             </RelativeLayout>
