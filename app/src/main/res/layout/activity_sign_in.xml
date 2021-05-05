@@ -55,7 +55,6 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="@android:color/white"
-        android:inputType="textEmailAddress"
         android:text="Login"/>
 
     <Button
@@ -72,7 +71,6 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="@android:color/white"
-        android:inputType="textEmailAddress"
         android:text="Need new account? Sign up"/>
 
 

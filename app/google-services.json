@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "490027949198",
+    "firebase_url": "https://instagram-clone-46b69-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "instagram-clone-46b69",
     "storage_bucket": "instagram-clone-46b69.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:490027949198:android:7700669587e7192839fddf",
+        "mobilesdk_app_id": "1:490027949198:android:cae57972099c8e1c39fddf",
         "android_client_info": {
           "package_name": "com.android.instagram"
         }
