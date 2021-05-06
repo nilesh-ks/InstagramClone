@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
+@Suppress("DEPRECATION")
 class SignUpActivity : AppCompatActivity() {
   //  lateinit var btnSignIn: Button
   //  lateinit var btnSignUp: Button
@@ -72,6 +74,7 @@ class SignUpActivity : AppCompatActivity() {
                     .addOnCompleteListener {task->
                         if(task.isSuccessful)
                         {
+                            Log.e("success", "saving info")
                             saveUserInfo(fullname,username,email, progressDialog)
                         }else
                         {
@@ -98,10 +101,9 @@ class SignUpActivity : AppCompatActivity() {
         userMap["bio"]="Hey there! I'm using Instagram."
     //In order to get the default profile image, we need to copy the profile image from the drawable folder
     // and upload it in the Firebase storage.
-        userMap["image"]="https://firebasestorage.googleapis.com/v0/b/instagram-clone-46b69.appspot.com/o/Default%20images%2Fprofile.png?alt=media&token=de61b476-14dd-4c8b-ba62-c2a6f1b307cf"
-
-        usersRef.child(currentUserID).setValue(userMap)
-            .addOnCompleteListener{task->
+        userMap["image"]="https://firebasestorage.googleapis.com/v0/b/instagram-7d7c6.appspot.com/o/Default%20images%2Fprofile.png?alt=media&token=dfd70ef3-166b-4f78-aa3d-dfbcd6a62ae6"
+        usersRef.child(currentUserID).push().setValue(userMap)
+            .addOnCompleteListener { task->
                 if(task.isSuccessful)
                 {
                     progressDialog.dismiss()
@@ -109,11 +111,13 @@ class SignUpActivity : AppCompatActivity() {
 
                     val intent=Intent(this@SignUpActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    Log.d("success", "successful")
                     startActivity(intent)
                     finish()
                 }
                 else
                 {
+                    Log.d("failed", "not successful")
                     val message=task.exception!!.toString()
                     Toast.makeText(this, "Error: $message", Toast.LENGTH_LONG).show()
                     FirebaseAuth.getInstance().signOut()
