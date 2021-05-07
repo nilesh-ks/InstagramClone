@@ -95,9 +95,9 @@ class SignUpActivity : AppCompatActivity() {
 
         val userMap= HashMap<String, Any>()
         userMap["uid"]= currentUserID
-        userMap["fullname"]=currentUserID
-        userMap["username"]=currentUserID
-        userMap["email"]=currentUserID
+        userMap["fullname"]=fullname
+        userMap["username"]=username
+        userMap["email"]=email
         userMap["bio"]="Hey there! I'm using Instagram."
     //In order to get the default profile image, we need to copy the profile image from the drawable folder
     // and upload it in the Firebase storage.
