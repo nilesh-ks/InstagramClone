@@ -22,7 +22,7 @@
                 android:layout_height="50dp">
                 <EditText
                     android:id="@+id/search_edit_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Search"
                     android:layout_centerVertical="true"
@@ -44,6 +44,7 @@
         android:id="@+id/recycler_view_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_below="@+id/app_bar_layout_search"/>
 
 </RelativeLayout>

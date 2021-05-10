@@ -24,6 +24,9 @@ class UserAdapter(private var mContext: Context,
         return UserAdapter.ViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return mUser.size
+    }
     override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
     val user = mUser[position]
 
@@ -34,9 +37,6 @@ class UserAdapter(private var mContext: Context,
 
     }
 
-    override fun getItemCount(): Int {
-        return mUser.size
-    }
 
     class ViewHolder(@NonNull itemView: View): RecyclerView.ViewHolder(itemView)
     {

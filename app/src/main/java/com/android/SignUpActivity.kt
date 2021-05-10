@@ -20,8 +20,9 @@ import com.google.firebase.database.core.Context
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
-@Suppress("DEPRECATION")
 class SignUpActivity : AppCompatActivity() {
   //  lateinit var btnSignIn: Button
   //  lateinit var btnSignUp: Button
@@ -95,8 +96,8 @@ class SignUpActivity : AppCompatActivity() {
 
         val userMap= HashMap<String, Any>()
         userMap["uid"]= currentUserID
-        userMap["fullname"]=fullname
-        userMap["username"]=username
+        userMap["fullname"] =fullname.toLowerCase(Locale.getDefault())
+        userMap["username"]=username.toLowerCase(Locale.getDefault())
         userMap["email"]=email
         userMap["bio"]="Hey there! I'm using Instagram."
     //In order to get the default profile image, we need to copy the profile image from the drawable folder
