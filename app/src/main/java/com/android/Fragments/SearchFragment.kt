@@ -37,17 +37,23 @@ class SearchFragment : Fragment() {
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
-        mUser = ArrayList()
+       mUser = ArrayList()
         userAdapter = context?.let { UserAdapter(it, mUser as ArrayList<User>, true) }
         recyclerView?.adapter = userAdapter
 
         view.search_edit_text.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int)
+            {
+
+            }
+            override fun afterTextChanged(p0: Editable?)
+            {
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(view.search_edit_text.text.toString()=="")
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int)
+            {
+                if(view?.search_edit_text?.text.toString()=="")
                 {
 
                 }
@@ -55,66 +61,74 @@ class SearchFragment : Fragment() {
                 {
                     recyclerView?.visibility=View.VISIBLE
                     retrieveUsers()
-                    searchUser(p0.toString().toLowerCase(Locale.getDefault()))
+                    searchUser(s.toString().toLowerCase(Locale.getDefault()))
                 }
             }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-
-        })
+ })
 
         return view
     }
 
     private fun searchUser(input: String) {
-        Log.d("searching","user")
+        Log.d("searching","user1")
         val query = FirebaseDatabase.getInstance().getReference()
                 .child("Users")
                 .orderByChild("fullname")
                 .startAt(input)
-                .endAt(input + "\uf8ff")
+                .endAt( input+"\uf8ff")
 
         query.addValueEventListener(object: ValueEventListener
         {
             override fun onDataChange(dataSnapshot: DataSnapshot)
             {
                 mUser?.clear()
-                for (snapshot in dataSnapshot.children)
+                Log.d("searching","user2")
+                val c = dataSnapshot.childrenCount
+                Log.i("countSearch","$c")
+                for (i in dataSnapshot.children)
                 {
-                    val user = snapshot.getValue(User::class.java)
+                    Log.d("searching","1")
+                    val user = i.getValue(User::class.java)
+                    Log.d("msg", "$user")
                     if(user!=null)
                     {
+                        Log.d("searching","user3")
                         mUser?.add(user)
                     }
+                    Log.d("searching","user4")
                 }
+                Log.d("searching","out of data change")
                 userAdapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(p0: DatabaseError) {
-
+                Log.d("searching","user5")
             }
+
 
         })
     }
 
     private fun retrieveUsers() {
-        Log.d("retrieving","user")
+        Log.d("retrieving","user1")
         val usersRef = FirebaseDatabase.getInstance().getReference().child("Users")
         usersRef.addValueEventListener(object: ValueEventListener
         {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if(view?.search_edit_text?.text.toString()=="")
                 {
+                    Log.d("retrieving","user2")
                     mUser?.clear()
                     for (snapshot in dataSnapshot.children)
                     {
+                        Log.d("retrieving","user3")
                         val user = snapshot.getValue(User::class.java)
                         if(user!=null)
                         {
                             mUser?.add(user)
+                            Log.d("retrieving","user4")
+
                         }
                     }
                     userAdapter?.notifyDataSetChanged()
@@ -122,7 +136,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-
+                Log.d("retrieving","user5")
             }
 
         })

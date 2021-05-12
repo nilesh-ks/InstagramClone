@@ -15,24 +15,24 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.user_item_layout.view.*
 
 class UserAdapter(private var mContext: Context,
-                   private var mUser: List<User>,
+                   private var mUser: ArrayList<User>,
                   private var isFragment: Boolean= false) : RecyclerView.Adapter<UserAdapter.ViewHolder>()
 {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(mContext).inflate(R.layout.user_item_layout, parent, false)
-        return UserAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return mUser.size
     }
-    override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val user = mUser[position]
 
-        holder.userNameTextView.text = user.getUsername()
-        holder.userFullnameTextView.text = user.getFullname()
-        Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(holder.userProfileImage)
+        holder.userNameTextView.text = user.username
+        holder.userFullnameTextView.text = user.fullname
+        Picasso.get().load(user.image).placeholder(R.drawable.profile).into(holder.userProfileImage)
 
 
     }

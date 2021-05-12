@@ -1,6 +1,6 @@
 package com.android.Model
 
-class User {
+/*class User {
     private var username: String=""
     private var fullname: String=""
     private var bio: String=""
@@ -8,6 +8,17 @@ class User {
     private var uid: String=""
 
     constructor()
+
+
+    constructor(username: String, fullname: String, bio: String, image: String, uid: String)
+    {
+        this.username=username
+        this.fullname=fullname
+        this.bio=bio
+        this.image=image
+        this.uid=uid
+    }
+
 
     fun getUsername(): String
     {
@@ -49,14 +60,22 @@ class User {
         this.image = image
     }
 
-    fun getUid(): String
+    fun getUID(): String
     {
         return uid
     }
 
-    fun setUid(uid: String)
+    fun setUID(uid: String)
     {
         this.uid = uid
     }
 
-}
+}*/
+
+data class User(
+       val username: String?="",
+                 val fullname: String?="",
+                 val bio: String?="",
+                 val image: String?="",
+                 val uid: String?=""
+)

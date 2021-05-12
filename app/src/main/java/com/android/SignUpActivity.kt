@@ -96,8 +96,8 @@ class SignUpActivity : AppCompatActivity() {
 
         val userMap= HashMap<String, Any>()
         userMap["uid"]= currentUserID
-        userMap["fullname"] =fullname.toLowerCase(Locale.getDefault())
-        userMap["username"]=username.toLowerCase(Locale.getDefault())
+        userMap["fullname"] =fullname.toLowerCase()
+        userMap["username"]=username.toLowerCase()
         userMap["email"]=email
         userMap["bio"]="Hey there! I'm using Instagram."
     //In order to get the default profile image, we need to copy the profile image from the drawable folder
