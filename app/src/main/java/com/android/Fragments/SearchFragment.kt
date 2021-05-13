@@ -71,7 +71,7 @@ class SearchFragment : Fragment() {
 
     private fun searchUser(input: String) {
         Log.d("searching","user1")
-        val query = FirebaseDatabase.getInstance().getReference()
+        val query = FirebaseDatabase.getInstance().reference
                 .child("Users")
                 .orderByChild("fullname")
                 .startAt(input)

@@ -103,7 +103,7 @@ class SignUpActivity : AppCompatActivity() {
     //In order to get the default profile image, we need to copy the profile image from the drawable folder
     // and upload it in the Firebase storage.
         userMap["image"]="https://firebasestorage.googleapis.com/v0/b/instagram-7d7c6.appspot.com/o/Default%20images%2Fprofile.png?alt=media&token=dfd70ef3-166b-4f78-aa3d-dfbcd6a62ae6"
-        usersRef.child(currentUserID).push().setValue(userMap)
+        usersRef.child(currentUserID).setValue(userMap)
             .addOnCompleteListener { task->
                 if(task.isSuccessful)
                 {
