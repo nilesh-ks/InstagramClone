@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.android.Fragments.ProfileFragment
 import com.android.Model.User
 import com.android.instagram.R
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +46,15 @@ class UserAdapter(private var mContext: Context,
         Picasso.get().load(user.image).placeholder(R.drawable.profile).into(holder.userProfileImage)
 
         checkFollowingStatus(user.uid.toString(), holder.followButton)
+
+        holder.itemView.setOnClickListener {
+            val pref= mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("profileId",user.uid)
+            pref.apply()
+
+            (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ProfileFragment()).commit()
+        }
 
         holder.followButton.setOnClickListener {
             if(holder.followButton.text.toString()=="Follow") {
