@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.android.instagram.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_account_settings.*
 
 class AccountSettingsActivity : AppCompatActivity() {
+
+    private lateinit var firebaseUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_settings)
+
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
 
         logout_btn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -20,5 +25,8 @@ class AccountSettingsActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
     }
+
 }
