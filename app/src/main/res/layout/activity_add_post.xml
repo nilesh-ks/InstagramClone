@@ -9,7 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar_layout_add_post">
+        android:id="@+id/app_bar_layout_add_post"
+        android:background="@android:color/white">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/add_post_toolbar"
             android:layout_width="match_parent"
@@ -53,6 +54,14 @@
         android:id="@+id/image_post"
         android:scaleType="centerCrop"
         android:src="@drawable/add_image_icon"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_box"
+        android:layout_margin="5dp"
+        android:maxLines="6"
+        android:hint="Say something about your post..."/>
 
 
 
