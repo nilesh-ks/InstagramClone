@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.cardview.widget.CardView app:cardElevation="5dp" android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="12dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    app:layout_goneMarginRight="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/linear1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:id="@+id/user_profile_image_search"
+                android:padding="5dp"
+                android:src="@drawable/profile"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="14dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/user_name_search"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="user name"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_height="220dp"
+            android:layout_width="match_parent"
+            android:id="@+id/post_image_home"
+            android:src="@drawable/profile"
+            android:scaleType="centerCrop"/>
+
+
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="5dp">
+
+            <ImageView
+                android:layout_height="40dp"
+                android:layout_width="41dp"
+                android:id="@+id/post_image_like_btn"
+                android:src="@drawable/heart_not_clicked"/>
+
+            <ImageView
+                android:layout_marginTop="3dp"
+                android:layout_height="34dp" android:layout_width="40dp"
+                android:id="@+id/post_image_comment_btn"
+                android:src="@drawable/comment"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@+id/post_image_like_btn"/>
+
+            <ImageView
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="0dp"
+                android:layout_height="39dp"
+                android:layout_width="40dp"
+                android:id="@+id/post_save_comment_btn"
+                android:src="@drawable/save_unfilled_large_icon"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/likes"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/publisher"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/description"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/comments"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16dp"
+            android:text=""
+            android:layout_marginStart="10dp" android:layout_marginBottom="5dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
