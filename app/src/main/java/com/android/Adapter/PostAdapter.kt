@@ -6,6 +6,7 @@ import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
@@ -70,7 +71,20 @@ class PostAdapter(private val mContext: Context,
 
         Picasso.get().load(post.postimage).into(holder.postimage)
 
+        if (post.description.equals(""))
+        {
+            holder.description.visibility = View.GONE
+        }
+        else
+        {
+            holder.description.visibility = View.VISIBLE
+            holder.description.text =post.description
+        }
+
         publisherInfo(holder.profileimage, holder.userName, holder.publisher, post.publisher)
+        isLiked(post.postid, holder.likeButton)
+        numberOfLikes(holder.likes, post.postid)
+
 
         holder.likeButton.setOnClickListener{
             if(holder.likeButton.tag=="Like")
@@ -93,6 +107,53 @@ class PostAdapter(private val mContext: Context,
             }
         }
 
+    }
+
+    private fun numberOfLikes(likes: TextView, postid: String?) {
+        val likesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(postid.toString())
+
+        likesRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+                    likes.text= snapshot.childrenCount.toString()+ "likes"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+    })
+    }
+
+    private fun isLiked(postid: String?, likeButton: ImageView) {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        val likesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(postid.toString())
+
+        likesRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.child(firebaseUser!!.uid).exists())
+                {
+                    likeButton.setImageResource(R.drawable.heart_clicked)
+                    likeButton.tag = "Liked"
+                }else
+                {
+                    likeButton.setImageResource(R.drawable.heart_not_clicked)
+                    likeButton.tag = "Like"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun publisherInfo(profileimage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String?) {
