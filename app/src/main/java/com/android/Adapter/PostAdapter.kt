@@ -1,6 +1,7 @@
 package com.android.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.android.MainActivity
 import com.android.Model.Post
 import com.android.Model.User
 import com.android.instagram.R
@@ -69,6 +71,28 @@ class PostAdapter(private val mContext: Context,
         Picasso.get().load(post.postimage).into(holder.postimage)
 
         publisherInfo(holder.profileimage, holder.userName, holder.publisher, post.publisher)
+
+        holder.likeButton.setOnClickListener{
+            if(holder.likeButton.tag=="Like")
+            {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.postid.toString())
+                    .child(firebaseUser!!.uid)
+                    .setValue(true)
+            }else
+            {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.postid.toString())
+                    .child(firebaseUser!!.uid)
+                    .removeValue()
+
+                val intent = Intent(mContext, MainActivity::class.java)
+                mContext.startActivity(intent)
+            }
+        }
+
     }
 
     private fun publisherInfo(profileimage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String?) {
